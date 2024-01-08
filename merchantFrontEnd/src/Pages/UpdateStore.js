@@ -7,6 +7,7 @@ const UpdateStore = () => {
   const location = useLocation();
   const theData = location.state;
   const theStoreNumber = theData?.storeNumber;
+  console.log(theStoreNumber);
   //const theStoreNumber = 1001;
   const navigate = useNavigate();
 
@@ -28,16 +29,16 @@ const UpdateStore = () => {
   const UpdateStoreHandler = () => {
     const updateStore = async () => {
       try {
-        
         const res = await StoreService.updateStore(store);
+        setStore(res.data);
         console.log(store);
         setShowMessage({
           trueFalse: true,
           variant: "alert-css success",
           text: "successfully updated",
         });
-        alert("successfully updated")
-        navigate(-1)
+        alert("successfully updated");
+        // navigate(-1)
       } catch (error) {
         console.log(error);
         setShowMessage({
@@ -79,7 +80,6 @@ const UpdateStore = () => {
       <div className="container">
         <h2 className="">Update Store</h2>
 
-        
         <div>
           {showMessage.trueFalse ? (
             <CustomAlert className={showMessage.variant}>
@@ -95,45 +95,43 @@ const UpdateStore = () => {
 
         <div className="">
           {store ? (
-            <form>
-              <div className="items">
-                <div className="item">
-                  <label>Store Number :</label>
-                  <input
-                    name="storeNumber"
-                    type="text"
-                    value={store.storeNumber || ""}
-                    // disabled={true}
-                  />
-                </div>
-
-                <div className="item">
-                  <label>Store Status :</label>
-                  <input
-                    name="storeStatus"
-                    type="text"
-                    value={store.storeStatus || ""}
-                    onChange={onChangeHandler}
-                  />
-                </div>
-
-                <div className="item">
-                  <label>Store Type :</label>
-                  <input
-                    name="storeType"
-                    type="text"
-                    value={store.storeType || ""}
-                    onChange={onChangeHandler}
-                  />
-                </div>
-
-                <div>
-                  <button className="bt" onClick={UpdateStoreHandler}>
-                    update store
-                  </button>
-                </div>
+            <div className="items">
+              <div className="item">
+                <label>Store Number :</label>
+                <input
+                  name="storeNumber"
+                  type="text"
+                  value={store.storeNumber || ""}
+                  // disabled={true}
+                />
               </div>
-            </form>
+
+              <div className="item">
+                <label>Store Status :</label>
+                <input
+                  name="storeStatus"
+                  type="text"
+                  value={store.storeStatus || ""}
+                  onChange={onChangeHandler}
+                />
+              </div>
+
+              <div className="item">
+                <label>Store Type :</label>
+                <input
+                  name="storeType"
+                  type="text"
+                  value={store.storeType || ""}
+                  onChange={onChangeHandler}
+                />
+              </div>
+
+              <div>
+                <button className="bt" onClick={UpdateStoreHandler}>
+                  update store
+                </button>
+              </div>
+            </div>
           ) : (
             <p>Loading...</p>
           )}

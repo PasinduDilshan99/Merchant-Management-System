@@ -146,7 +146,7 @@ export const UpdateMerchant = () => {
         <div className="cen">
           <button className="bt" onClick={UpdateMerchantHandler}>
             Update
-          </button>{" "}
+          </button>
         </div>
       </div>
     </Wrapper>
